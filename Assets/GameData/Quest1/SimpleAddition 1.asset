@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d61bdea11fbf0944a4f37172ca40a57, type: 3}
   m_Name: SimpleAddition 1
   m_EditorClassIdentifier: 
-  text: What is ${2d} + ${2d}
+  text: Cuanto es ${2d} + ${2d}
   answerFormula: ${0} + ${1}
   answers: []
   answer: 

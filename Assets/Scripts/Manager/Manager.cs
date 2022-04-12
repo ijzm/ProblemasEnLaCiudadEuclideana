@@ -6,6 +6,8 @@ public class Manager : MonoBehaviour
 {
 	public static Manager manager;
 	public Question currentQuestion = null;
+	public int maxQuestionIndex = 0;
+	public int currentQuestionIndex = 0;
 	public Quest currentQuest = null;
 	public int Score = 0;
 	public float timeLeft = 0;
@@ -25,17 +27,17 @@ public class Manager : MonoBehaviour
 	//TODO:
 	void Start() {
 		Question q = currentQuest.generateQuestion();
-		Debug.Log($"Generated Question {q.text}");
+		//Debug.Log($"Generated Question {q.text}");
 
 		timerBar = GameObject.Find("TimerForeground").GetComponent<Image>();
-
+		maxQuestionIndex = currentQuest.maxQuestions;
 		DisplayQuestion(q);
 	}
 
 	void Update() {
 		if (currentQuestion != null) {
 			if (timeLeft <= 0) {
-				Debug.Log("Time's up!");
+				//Debug.Log("Time's up!");
 				//TODO: Sound Effect
 				DisplayQuestion(currentQuest.generateQuestion());
 			} else {
@@ -48,8 +50,9 @@ public class Manager : MonoBehaviour
 	}
 
 	void DisplayQuestion(Question question) {
+		maxQuestionIndex++;
 
-		if(currentQuest.currentQuestions >= currentQuest.maxQuestions) {
+		if(currentQuestionIndex >= maxQuestionIndex) {
 			Debug.Log("Quest is complete!");
 			//TODO: Finish Quest
 		}

@@ -11,11 +11,7 @@ public class Quest : ScriptableObject
 	public List<string> instructions = new List<string>();
 
 	public int maxQuestions = 10;
-	public int currentQuestions = 0;
-
 	public Question generateQuestion() {
-		Debug.Log("Generating Question");
-
 		Question template = questions[Random.Range(0, questions.Count)];
 		Question output = ScriptableObject.CreateInstance<Question>();
 		output.maxTime = template.maxTime;
@@ -23,7 +19,6 @@ public class Quest : ScriptableObject
 		parseQuestion(template, output);
 		Util.Shuffle(output.answers);
 
-		currentQuestions++;
 
 		return output;
 	}
@@ -52,9 +47,6 @@ public class Quest : ScriptableObject
 			Debug.LogError(e);
 			throw;
 		}
-
-		Debug.Log("Finished Parsing Question");
-
 
 		try	{
 			splitText = template.answerFormula.Split(' ');
@@ -101,8 +93,6 @@ public class Quest : ScriptableObject
 			Debug.LogError(e);
 			throw;
 		}
-
-		Debug.Log("Finished Parsing answerFormula");
 	}
 
 	//Generates a random number given a token

@@ -18,3 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e21b3907ed31914f9a5b7eca2d5965a, type: 2}
   - {fileID: 11400000, guid: 83233fb45ccd1b74fa4aadc999ffd3cb, type: 2}
   instructions: []
+  maxQuestions: 10
+  currentQuestions: 0

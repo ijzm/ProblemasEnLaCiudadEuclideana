@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 //https://answers.unity.com/questions/323195/how-can-i-have-a-static-class-i-can-access-from-an.html
 public class Manager : MonoBehaviour 
@@ -14,6 +15,12 @@ public class Manager : MonoBehaviour
 
 	private Image timerBar;
 
+	public bool isPaused = false;
+	public GameObject questionCanvas;
+
+	//For Quest 3:
+	public Dictionary<string, int> quest3Values = new Dictionary<string, int>();
+
 	void Awake() {
 		if (manager != null) {
 			GameObject.Destroy(manager);
@@ -24,14 +31,17 @@ public class Manager : MonoBehaviour
 		DontDestroyOnLoad(this);
 	}
 
-	//TODO:
 	void Start() {
-		Question q = currentQuest.generateQuestion();
-		//Debug.Log($"Generated Question {q.text}");
+		quest3Values.Add("Male", 0);
+		quest3Values.Add("Female", 0);
 
-		timerBar = GameObject.Find("TimerForeground").GetComponent<Image>();
-		maxQuestionIndex = currentQuest.maxQuestions;
-		DisplayQuestion(q);
+		quest3Values.Add("Red", 0);
+		quest3Values.Add("Green", 0);
+		quest3Values.Add("Blue", 0);
+
+		quest3Values.Add("Square", 0);
+		quest3Values.Add("Circle", 0);
+		quest3Values.Add("Triangle", 0);
 	}
 
 	void Update() {
@@ -49,25 +59,39 @@ public class Manager : MonoBehaviour
 		}
 	}
 
+	public void StartQuest() {
+		questionCanvas.SetActive(true);
+		Question q = currentQuest.generateQuestion();
+		timerBar = GameObject.Find("TimerForeground").GetComponent<Image>();
+		maxQuestionIndex = currentQuest.maxQuestions;
+		DisplayQuestion(q);
+		this.isPaused = true;
+	}
+
 	void DisplayQuestion(Question question) {
-		maxQuestionIndex++;
+		currentQuestionIndex++;
 
 		if(currentQuestionIndex >= maxQuestionIndex) {
 			Debug.Log("Quest is complete!");
 			//TODO: Finish Quest
+
+			Ui_Manager uiManager = FindObjectOfType<Ui_Manager>();
+			if (uiManager != null) {
+				uiManager.StartDialogue(currentQuest?.endDialog, currentQuest?.questPortrait, currentQuest, false);
+			}
+			else {
+				Debug.LogError("No Ui_Manager found");
+			}
+
+			currentQuest = null;
+			currentQuestion = null;
+			questionCanvas.SetActive(false);
+			this.isPaused = false;
+			return;
 		}
 
 		currentQuestion = question;
 		timeLeft = currentQuestion.maxTime;
-
-		GameObject questionCanvas = GameObject.Find("QuestionCanvas");
-
-		if(questionCanvas == null) {
-			Debug.LogError("QuestionCanvas not found");
-			return;
-		}
-
-		questionCanvas.GetComponent<Canvas>().enabled = true;
 
 		questionCanvas.transform.Find("QuestionText").GetComponent<Text>().text = question.text;
 

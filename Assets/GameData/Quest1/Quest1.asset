@@ -17,6 +17,12 @@ MonoBehaviour:
   questions:
   - {fileID: 11400000, guid: 4e21b3907ed31914f9a5b7eca2d5965a, type: 2}
   - {fileID: 11400000, guid: 83233fb45ccd1b74fa4aadc999ffd3cb, type: 2}
-  instructions: []
+  startDialog:
+  - First quest
+  - First quest second dialog
+  - First quest start!
+  endDialog:
+  - Congratulations First quest
+  - Congratulations First quest!!
+  questPortrait: {fileID: 21300000, guid: 63747a758c17af24caa3f5e3ea0fc761, type: 3}
   maxQuestions: 10
-  currentQuestions: 0

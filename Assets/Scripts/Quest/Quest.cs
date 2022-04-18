@@ -8,7 +8,9 @@ public class Quest : ScriptableObject
 	public string state;
 	public int difficulty = 0;
 	public List<Question> questions = new List<Question>();
-	public List<string> instructions = new List<string>();
+	public List<string> startDialog = new List<string>();
+	public List<string> endDialog = new List<string>();
+	public Sprite questPortrait;
 
 	public int maxQuestions = 10;
 	public Question generateQuestion() {

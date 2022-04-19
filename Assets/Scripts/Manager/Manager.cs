@@ -86,17 +86,17 @@ public class Manager : MonoBehaviour
 			currentQuest = null;
 			currentQuestion = null;
 			questionCanvas.SetActive(false);
-			this.isPaused = false;
+			currentQuestionIndex = 0;
 			return;
 		}
 
 		currentQuestion = question;
 		timeLeft = currentQuestion.maxTime;
 
-		questionCanvas.transform.Find("QuestionText").GetComponent<Text>().text = question.text;
+		questionCanvas.transform.Find("Margins/QuestionText").GetComponent<Text>().text = question.text;
 
 		for(int i = 0; i < question.answers.Count; i++) {
-			GameObject answerButton = questionCanvas.transform.Find("Answers/Answer" + i).gameObject;
+			GameObject answerButton = questionCanvas.transform.Find("Margins/Answers/Answer" + i).gameObject;
 			if(answerButton == null) {
 				Debug.LogError("AnswerButton" + i + " not found");
 				continue;

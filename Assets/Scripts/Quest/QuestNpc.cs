@@ -13,6 +13,8 @@ public class QuestNpc : MonoBehaviour
 
 			Ui_Manager uiManager = FindObjectOfType<Ui_Manager>();
 
+			Destroy(transform.Find("Exclamation").gameObject);
+
 			if (uiManager != null) {
 				uiManager.StartDialogue(quest?.startDialog, quest?.questPortrait, quest, true);
 			}

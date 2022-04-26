@@ -29,6 +29,21 @@ public class Ui_Manager : MonoBehaviour {
 		DisplayNextLine();
 	}
 
+	public void StartDialogue(List<string> dialogue, Sprite portrait)
+	{
+		Manager.manager.isPaused = true;
+		dialogPortrait.sprite = portrait;
+		dialogAnimator.SetBool("isOpen", true);
+
+		dialogText.Clear();
+		foreach (string line in dialogue)
+		{
+			dialogText.Enqueue(line);
+		}
+		this.isStart = false;
+		DisplayNextLine();
+	}
+
 	public void DisplayNextLine() {
 		if (dialogText.Count == 0) {
 			EndDialogue();

@@ -113,7 +113,7 @@ public class Manager : MonoBehaviour
 		if(answer == currentQuestion.answer) {
 			Debug.Log("Correct answer");
 			//TODO: Score
-			Score += 50;
+			Score += 50 + (int)(timeLeft * 5);
 			UpdateScore();
 		} else {
 			Debug.Log("Wrong answer");

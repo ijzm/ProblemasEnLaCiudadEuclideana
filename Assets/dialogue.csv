@@ -1,0 +1,11 @@
+dialog_type,quest_id,es,en
+start_dialog,quest_quantity,Auida;Aiuda Por favor;Aiudaaaaaaa,
+end_dialog,quest_quantity,Auida;Aiuda Por favor;Aiudaaaaaaa,
+start_dialog,quest_series,Auida;Aiuda Por favor;Aiudaaaaaaa,
+end_dialog,quest_series,Auida;Aiuda Por favor;Aiudaaaaaaa,
+start_dialog,quest_statistics,Auida;Aiuda Por favor;Aiudaaaaaaa,
+end_dialog,quest_statistics,Auida;Aiuda Por favor;Aiudaaaaaaa,
+start_dialog,quest_geometry,Auida;Aiuda Por favor;Aiudaaaaaaa,
+end_dialog,quest_geometry,Auida;Aiuda Por favor;Aiudaaaaaaa,
+start_dialog,quest_boss,Auida;Aiuda Por favor;Aiudaaaaaaa,
+end_dialog,quest_boss,Auida;Aiuda Por favor;Aiudaaaaaaa,

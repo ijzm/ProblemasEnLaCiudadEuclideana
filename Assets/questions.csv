@@ -1,0 +1,2 @@
+quest_id,achivement_id,question_text_es,answer_formula_es,question_text_en,answer_formula_en
+quest_quantity,natural_operations,¿ Cuanto es ${2d} + ${2d} ?,${0} + ${1},,

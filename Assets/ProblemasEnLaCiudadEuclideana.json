@@ -1,0 +1,210 @@
+{
+	"game_description": {
+		"label": "Problemas En La Ciudad Euclideana",
+		"short_description": "Despues de despertar en una ciudad desconocida, ¿Podras usar tus conocimientos matematicos para ayudarla?.",
+		"long_description": "Explora e interactua con los habitantes de la Ciudad Euclideana, resolviendo problemas matemáticos permitiendo mejorar tus conocimientos para poder combatir con la hechicera de las matematicas y salvar la ciudad.",
+		"images": [
+			{
+				"label": "Logo",
+				"description": "Logo de Problemas En La Ciudad Euclideana",
+				"url": "http://placehold.jp/150x150.png//TODO"
+			}
+		],
+		"urls": [
+			{
+				"label": "Problemas En La Ciudad Euclideana (Android APK)",
+				"description": "Version para dispositivos Android",
+				"url": "http://placehold.jp/150x150.png//TODO"
+			}
+		]
+	},
+	"dgbl_features": {
+		"learning_areas": [
+			{
+				"label": "Mathematics"
+			}
+		],
+		"ilos": [
+			{
+				"label": "quest_quantity",
+				"description": "Competencia 1: Resuelve problemas de cantidad",
+				"selectable": "true",
+				"selected": "true",
+				"ilo_parameters": [
+					{
+						"label": "time",
+						"description": "Tiempo (En segundos) para completar la respuesta",
+						"parameter_type": "integer",
+						"default_value": "30",
+						"min_value": "0",
+						"max_value": "60"
+					},
+					{
+						"label": "num_questions",
+						"description": "Número de preguntas a mostrar",
+						"parameter_type": "integer",
+						"default_value": "10",
+						"min_value": "3",
+						"max_value": "30"
+					},
+					{
+						"label": "natural_operations",
+						"description": "Mostrar problemas del tipo: Adición, sustracción, multiplicación y división con números naturales",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "fraction_operations",
+						"description": "Mostrar problemas del tipo: Adición, sustracción y multiplicación con fracciones",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "digit_recognizing",
+						"description": "Mostrar problemas del tipo: Reconocer posiciones de números con dígitos de hasta 6 cifras y realizar comparaciones entre ellos",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "natural_properties",
+						"description": "Mostrar problemas del tipo: Propiedades de los numeros naturales",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "real_operations",
+						"description": "Mostrar problemas del tipo: Operaciones de adición y sustracción de números decimales",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					}
+				]
+			},
+			{
+				"label": "quest_series",
+				"description": "Competencia 2: Resuelve problemas de regularidad, equivalencia y cambio",
+				"selectable": "true",
+				"selected": "true",
+				"ilo_parameters": [
+					{
+						"label": "time",
+						"description": "Tiempo (En segundos) para completar la respuesta",
+						"parameter_type": "integer",
+						"default_value": "30",
+						"min_value": "0",
+						"max_value": "60"
+					},
+					{
+						"label": "num_questions",
+						"description": "Número de preguntas a mostrar",
+						"parameter_type": "integer",
+						"default_value": "10",
+						"min_value": "3",
+						"max_value": "30"
+					},
+					{
+						"label": "equations_simple",
+						"description": "Mostrar problemas del tipo: Ecuaciones ax + b = c",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "series_geometric",
+						"description": "Mostrar problemas del tipo: Series geométricas",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "series_additive_second_order",
+						"description": "Mostrar problemas del tipo: Series aditivas de segundo orden",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					}
+				]
+			},
+			{
+				"label": "quest_statistics",
+				"description": "Competencia 3: Resuelve problemas de gestión de datos e incertidumbre",
+				"selectable": "true",
+				"selected": "true",
+				"ilo_parameters": [
+					{
+						"label": "time",
+						"description": "Tiempo (En segundos) para completar la respuesta",
+						"parameter_type": "integer",
+						"min_value": "0",
+						"max_value": "60"
+					},
+					{
+						"label": "num_questions",
+						"description": "Número de preguntas a mostrar",
+						"parameter_type": "integer",
+						"default_value": "10",
+						"min_value": "3",
+						"max_value": "30"
+					},
+					{
+						"label": "statistics_characteristics",
+						"description": "Mostrar problemas del tipo: Identificar características cualitativas y cuantitativas discretas",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "statistics_metrics",
+						"description": "Mostrar problemas del tipo: Media aritmética, moda y punto de equilibrio",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "statistics_graphs",
+						"description": "Mostrar problemas del tipo: Gráficos de barra y tablas de doble entrada",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					}					
+				]
+			},
+			{
+				"label": "quest_geometry",
+				"description": "Competencia 4: Resuelve problemas de forma, movimiento y localización",
+				"selectable": "true",
+				"selected": "true",
+				"ilo_parameters": [
+					{
+						"label": "time",
+						"description": "Tiempo (En segundos) para completar la respuesta",
+						"parameter_type": "integer",
+						"default_value": "30",
+						"min_value": "0",
+						"max_value": "60"
+					},
+					{
+						"label": "num_questions",
+						"description": "Número de preguntas a mostrar",
+						"default_value": "true",
+						"parameter_type": "integer",
+						"default_value": "10",
+						"min_value": "3",
+						"max_value": "30"
+					},
+					{
+						"label": "geometry_location",
+						"description": "Mostrar problemas del tipo: Relacionar datos de ubicación y recorrido de objetos",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "geometry_maps",
+						"description": "Mostrar problemas del tipo: Relaciones entre objetos reales o imaginarios y sus representaciones en mapas y croquis",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					},
+					{
+						"label": "geometry_metrics",
+						"description": "Mostrar problemas del tipo: Calcular y comprender medidas de longitud y perímetro",
+						"default_value": "true",
+						"parameter_type": "boolean"
+					}
+				]
+			}
+		]
+	}
+}

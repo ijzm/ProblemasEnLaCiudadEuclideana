@@ -6,15 +6,22 @@ using System.Data;
 public class Quest : ScriptableObject
 {
 	public string state;
-	public int difficulty = 0;
 	public List<Question> questions = new List<Question>();
 	public List<string> startDialog = new List<string>();
 	public List<string> endDialog = new List<string>();
 	public Sprite questPortrait;
 
 	public int maxQuestions = 10;
+	public int maxTime = 10;
+	public List<string> allowedQuests = new List<string>();
 	public Question generateQuestion() {
-		Question template = questions[Random.Range(0, questions.Count)];
+		
+		Question template;
+		if(questions.Count == 0) {
+			template = Resources.Load<Question>("ErrorQuestion");
+		} else {
+			template = questions[Random.Range(0, questions.Count)];
+		} 
 		Question output = ScriptableObject.CreateInstance<Question>();
 		output.maxTime = template.maxTime;
 

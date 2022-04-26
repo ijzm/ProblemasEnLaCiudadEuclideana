@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 	public float speed = 5f;
 	public LayerMask colisionLayer;
 	public LayerMask interactionLayer;
+	public Animator animator;
 	private InputMaster controls;
 	private Vector2 targetPosition;
 	private Direction direction;
@@ -29,7 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
 	private void GetMovement() {
 		AxisInput = controls.Player.Move.ReadValue<Vector2>();
+		
 		if (AxisInput != Vector2.zero && targetPosition == (Vector2)transform.position) {
+			
 			if (Mathf.Abs(AxisInput.x) > Mathf.Abs(AxisInput.y)) {
 				if (AxisInput.x > 0) {
 					direction = Direction.RIGHT;
@@ -63,6 +66,18 @@ public class PlayerMovement : MonoBehaviour
 					}
 				}
 			}
+		}
+
+		//Animations:
+		if(animator.GetInteger("Direction") != (int)direction) {
+			animator.SetInteger("Direction", (int)direction);
+		}
+
+		if (targetPosition == (Vector2)transform.position && AxisInput == Vector2.zero) {
+			animator.speed = 0;
+			animator.Play(animator.GetAnimatorTransitionInfo(0).nameHash, 0, 0f);
+		} else {
+			animator.speed = 1;
 		}
 	}
 

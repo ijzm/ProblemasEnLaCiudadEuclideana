@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4579432162712036672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4579432162712036674}
+  - component: {fileID: 4579432162712036675}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4579432162712036674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4579432162712036672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4579432162712036675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4579432162712036672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6250a686c49b74544a8a7c5a22a20d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackConfig: {fileID: 4900000, guid: 3c069bdb3448be84e9f0b23273d24766, type: 3}
+  DialoguesCSV: {fileID: 4900000, guid: 6ec3cdd2c4ad61648b38a34eeb7f7e50, type: 3}
+  QuestionsCSV: {fileID: 4900000, guid: e19c45276f965394d9c544c4276922fe, type: 3}
+  QuestNames:
+  - quest_quantity
+  - quest_series
+  - quest_statistics
+  - quest_geometry
+  - quest_boss
+  Quests:
+  - {fileID: 11400000, guid: 17a17fc7d4b1a4a4da98597feed0a1a0, type: 2}
+  - {fileID: 11400000, guid: 3e68c358d0e6ad047a8d6446a7420e4e, type: 2}
+  - {fileID: 11400000, guid: 8e20c0a9e18eeed47a45eff12cebbf0e, type: 2}
+  - {fileID: 11400000, guid: 851501e74c98c4a42bfdee855ad63d22, type: 2}
+  - {fileID: 11400000, guid: f4b42a701d943eb4ebb6c40e5d5f2cc0, type: 2}

@@ -77,7 +77,7 @@ public class Quest : ScriptableObject
 			//No eval so we gotta use something else
 			//https://stackoverflow.com/questions/333737/evaluating-string-342-yield-int-18
 			DataTable dt = new DataTable();
-			q.answer = dt.Compute(q.answerFormula, "").ToString();
+			q.answer = (Mathf.Round(float.Parse(dt.Compute(q.answerFormula, "").ToString()) * 100f) / 100f).ToString();
 
 			q.answers = new List<string>();
 			q.answers.Add(q.answer);
@@ -85,13 +85,17 @@ public class Quest : ScriptableObject
 			//Generates 2 more answers
 			for (int i = 0; i < 2; i++) {
 				float tempAnswer = Mathf.Abs(float.Parse(q.answer) * Random.Range(-2.0f, 2.0f));
+				if(tempAnswer - float.Parse(q.answer) <= 0.1f) {
+					tempAnswer += Random.Range(-2, 2);
+				}
+				
 				if(q.answer.Contains("-")) {
 					tempAnswer *= -1.0f;
 				}
 
 				if(q.answer.Contains(".")) {
 					//TODO: Normalize floats
-					q.answers.Add(tempAnswer.ToString());
+					q.answers.Add((Mathf.Round(tempAnswer * 100f) / 100f).ToString());
 				} else {
 					q.answers.Add(((int)tempAnswer).ToString());
 				}
@@ -99,6 +103,7 @@ public class Quest : ScriptableObject
 		}
 		catch (System.Exception e) {
 			Debug.LogError($"Error parsing Answer Formula [{template.answerFormula}]");
+			Debug.LogError($"Question [{template.text}]");
 			Debug.LogError(e);
 			throw;
 		}
@@ -113,11 +118,16 @@ public class Quest : ScriptableObject
 		try {
 			if (token.Contains("d")) {
 				int digits = int.Parse(token.Replace("d", "").Replace("-", ""));
+				int temp;
 				if (token.Contains("-")) {
-					return Random.Range(-(int)Mathf.Pow(10, digits), (int)Mathf.Pow(10, digits)).ToString();
+					temp = Random.Range(-(int)Mathf.Pow(10, digits), (int)Mathf.Pow(10, digits));
+					if(temp == 0) { temp++; }
+					return temp.ToString();
 				}
-				return Random.Range(0, (int)Mathf.Pow(10, digits)).ToString();
-
+				
+				temp = Random.Range(0, (int)Mathf.Pow(10, digits));
+				if(temp == 0) { temp++; }
+				return temp.ToString();
 			}
 			if (token.Contains("f")) {
 				string newToken = token.Replace("f", "").Replace("-", "");
@@ -134,6 +144,7 @@ public class Quest : ScriptableObject
 					return (temp / (float)Mathf.Pow(10, dec)).ToString();
 				}
 				temp = Random.Range(0, (int)Mathf.Pow(10, real + dec));
+				if(temp == 0) { temp++; }
 				return (temp / (float)Mathf.Pow(10, dec)).ToString();
 			}
 

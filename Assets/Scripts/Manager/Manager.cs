@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 //https://answers.unity.com/questions/323195/how-can-i-have-a-static-class-i-can-access-from-an.html
 public class Manager : MonoBehaviour 
@@ -17,6 +18,10 @@ public class Manager : MonoBehaviour
 
 	public bool isPaused = false;
 	public GameObject questionCanvas;
+
+	public AudioManager CityMusic;
+	public AudioManager BattleMusic;
+
 
 	//For Quest 3:
 	public Dictionary<string, int> quest3Values = new Dictionary<string, int>();
@@ -42,13 +47,19 @@ public class Manager : MonoBehaviour
 		quest3Values.Add("Square", 0);
 		quest3Values.Add("Circle", 0);
 		quest3Values.Add("Triangle", 0);
+
+		Debug.Log(SceneManager.GetActiveScene().name);
+
+		if(SceneManager.GetActiveScene().name == "Game") {
+			StartCoroutine(CityMusic.FadeIn(2f));
+		}
 	}
 
 	void Update() {
 		if (currentQuestion != null) {
-			if (timeLeft <= 0) {
+			if (timeLeft <= 0 && currentQuest != null) {
 				//Debug.Log("Time's up!");
-				//TODO: Sound Effect
+				Instantiate(Resources.Load("WrongSound"));
 				DisplayQuestion(currentQuest.generateQuestion());
 			} else {
 				timeLeft -= Time.deltaTime;
@@ -61,10 +72,15 @@ public class Manager : MonoBehaviour
 
 	public void StartQuest() {
 		questionCanvas.SetActive(true);
+		if(currentQuest == null) {
+			return;
+		}
 		Question q = currentQuest.generateQuestion();
 		timerBar = GameObject.Find("TimerForeground").GetComponent<Image>();
 		maxQuestionIndex = currentQuest.maxQuestions;
 		DisplayQuestion(q);
+		StartCoroutine(Manager.manager.CityMusic.FadeOut(2f));
+		StartCoroutine(Manager.manager.BattleMusic.FadeIn(2f));
 		this.isPaused = true;
 	}
 
@@ -73,7 +89,10 @@ public class Manager : MonoBehaviour
 
 		if(currentQuestionIndex >= maxQuestionIndex) {
 			Debug.Log("Quest is complete!");
-			//TODO: Finish Quest
+			//TODO: Finish Quest)
+
+			StartCoroutine(Manager.manager.CityMusic.FadeIn(2f));
+			StartCoroutine(Manager.manager.BattleMusic.FadeOut(2f));
 
 			Ui_Manager uiManager = FindObjectOfType<Ui_Manager>();
 			if (uiManager != null) {
@@ -87,16 +106,24 @@ public class Manager : MonoBehaviour
 			currentQuestion = null;
 			questionCanvas.SetActive(false);
 			currentQuestionIndex = 0;
+
+			GameObject.Find("UICamera/CommonCanvas/LocatorArrow").SendMessage("FindNPCs");
+
+			if (GameObject.FindGameObjectsWithTag("Exclamation").Length == 0) {
+				//Win Game
+				SceneManager.LoadScene("Menu");
+			}
+
 			return;
 		}
 
 		currentQuestion = question;
 		timeLeft = currentQuestion.maxTime;
 
-		questionCanvas.transform.Find("Margins/QuestionText").GetComponent<Text>().text = question.text;
+		questionCanvas.transform.Find("QuestionText").GetComponent<Text>().text = question.text;
 
 		for(int i = 0; i < question.answers.Count; i++) {
-			GameObject answerButton = questionCanvas.transform.Find("Margins/Answers/Answer" + i).gameObject;
+			GameObject answerButton = questionCanvas.transform.Find("Answers/Answer" + i).gameObject;
 			if(answerButton == null) {
 				Debug.LogError("AnswerButton" + i + " not found");
 				continue;
@@ -113,9 +140,11 @@ public class Manager : MonoBehaviour
 		if(answer == currentQuestion.answer) {
 			Debug.Log("Correct answer");
 			//TODO: Score
+			Instantiate(Resources.Load("CorrectSound"));
 			Score += 50 + (int)(timeLeft * 5);
 			UpdateScore();
 		} else {
+			Instantiate(Resources.Load("WrongSound"));
 			Debug.Log("Wrong answer");
 		}
 

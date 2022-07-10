@@ -5,9 +5,22 @@ public class QuestNpc : MonoBehaviour
 {
 	public Quest quest;
 	public bool questStarted = false;
+	public bool isBoss = false;
+
+	public void Start() {
+		if(quest.questions.Count <= 0) {
+			Destroy(this.gameObject);
+		}
+	}
 
 	public void StartQuest() {
 		Debug.Log("Starting Quest");
+		if(isBoss) {
+			if(GameObject.FindGameObjectsWithTag("Exclamation").Length > 1) {
+				return;
+			}
+		}
+
 		if(questStarted == false) {
 			questStarted = true;
 

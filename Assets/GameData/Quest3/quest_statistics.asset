@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: quest_statistics
   m_EditorClassIdentifier: 
   state: 
-  questions:
-  - {fileID: 11400000, guid: 8e186a1a633c72e47888f4c4835e5624, type: 2}
+  questions: []
   startDialog:
-  - 3rd quest
+  - quest_statistics start_dialog
   endDialog:
-  - Congratulations 3rd
-  questPortrait: {fileID: 21300000, guid: 63747a758c17af24caa3f5e3ea0fc761, type: 3}
+  - quest_statistics end_dialog
+  questPortrait: {fileID: 21300000, guid: 84dbedbb21b877d4a880b7cb04800c45, type: 3}
   maxQuestions: 10
+  maxTime: 0
+  allowedQuests:
+  - statistics_characteristics
+  - statistics_metrics
+  - statistics_graphs

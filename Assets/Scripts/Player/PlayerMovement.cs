@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
 	private Direction direction;
 	private Vector2 AxisInput;
 
+	public Sprite portrait;
+
+	float interactionTime = 0;
+
 	void Awake() {
 		controls = new InputMaster();
 		controls.Player.Move.Enable();
@@ -82,11 +86,10 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void Update() {
-		//TODO: Update Animation
-
 		if(Manager.manager.isPaused == false) {
 			GetMovement();
-			if(controls.Player.Interact.triggered) {
+			if(controls.Player.Interact.triggered && Time.time > interactionTime) {
+				interactionTime = Time.time + 1f;
 				Interact();
 			}
 		}
@@ -95,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Interact() {
 		RaycastHit2D rh;
+		NetworkManager networkManager = FindObjectOfType<NetworkManager>();
 
 		Vector2 dir = Vector2.zero;
 
@@ -113,9 +117,57 @@ public class PlayerMovement : MonoBehaviour
 
 		rh = Physics2D.Raycast(transform.position, dir, 1, interactionLayer);
 
-		rh.collider?.gameObject.GetComponent<QuestNpc>()?.StartQuest();
-
+		QuestNpc questNpc = null;
 		
+		if(rh.collider != null) {
+			questNpc = rh.collider.gameObject.GetComponent<QuestNpc>();
+		} 
+
+		if(questNpc != null) {
+			if(questNpc.isBoss) {
+				Ui_Manager uiManager = FindObjectOfType<Ui_Manager>();
+				List<string> dialog = new List<string>();
+				if (GameObject.FindGameObjectsWithTag("Exclamation").Length > 1)
+				{
+					foreach (var item in networkManager.dialogues) {
+						if ((string)item["quest_id"] == "quest_boss" && (string)item["dialog_type"] == "not_enough"){
+							dialog.AddRange(item["es"].ToString().Split(';'));
+							Debug.Log(item["es"].ToString());
+							break;
+						}
+					}
+
+					animator.speed = 0;
+					animator.Play(animator.GetAnimatorTransitionInfo(0).nameHash, 0, 0f);
+
+					uiManager.StartDialogue(dialog, questNpc.quest.questPortrait);
+				} else {
+					questNpc.StartQuest();
+				}
+			} else {
+				questNpc.StartQuest();
+			}
+
+			return;
+		}
+
+
+
+		if (rh.collider == null) {
+			Ui_Manager uiManager = FindObjectOfType<Ui_Manager>();
+			List<string> dialog = new List<string>();
+
+			foreach (var item in networkManager.dialogues){
+				Debug.Log((string)item["quest_id"]);
+				if ((string)item["quest_id"] == "dialogue_interact") {
+					dialog.AddRange(item["es"].ToString().Split(';'));
+				}
+			}
+			animator.speed = 0;
+			animator.Play(animator.GetAnimatorTransitionInfo(0).nameHash, 0, 0f);
+
+			uiManager.StartDialogue(dialog, portrait);
+		}
 	}
 
 

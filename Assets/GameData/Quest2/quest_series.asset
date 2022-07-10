@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: quest_series
   m_EditorClassIdentifier: 
   state: 
-  questions:
-  - {fileID: 11400000, guid: 8e186a1a633c72e47888f4c4835e5624, type: 2}
+  questions: []
   startDialog:
-  - Second Quest
-  - Another Dialog
+  - Se me han perdido algunas cosas
+  - "\xBFPodr\xEDas ayudarme a encontrarlas?"
   endDialog:
-  - Congratulations Second Quest
-  - 'Congratulations '
-  questPortrait: {fileID: 21300000, guid: 63747a758c17af24caa3f5e3ea0fc761, type: 3}
+  - "\xA1Gracias!"
+  questPortrait: {fileID: 21300000, guid: 180b56e3d0b217949a943e4a8b932d62, type: 3}
   maxQuestions: 10
+  maxTime: 30
+  allowedQuests:
+  - equations_simple
+  - series_geometric
+  - series_additive_second_order

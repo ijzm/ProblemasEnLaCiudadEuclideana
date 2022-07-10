@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: quest_boss
   m_EditorClassIdentifier: 
   state: 
-  questions:
-  - {fileID: 11400000, guid: 8e186a1a633c72e47888f4c4835e5624, type: 2}
+  questions: []
   startDialog:
   - First quest
   - First quest second dialog
@@ -22,5 +21,7 @@ MonoBehaviour:
   endDialog:
   - Congratulations First quest
   - Congratulations First quest!!
-  questPortrait: {fileID: 21300000, guid: 63747a758c17af24caa3f5e3ea0fc761, type: 3}
+  questPortrait: {fileID: 21300000, guid: c40ff289e54b4d14a99440540dedd25b, type: 3}
   maxQuestions: 10
+  maxTime: 10
+  allowedQuests: []

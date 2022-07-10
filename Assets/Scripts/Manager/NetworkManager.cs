@@ -12,8 +12,15 @@ public class NetworkManager : MonoBehaviour
 	public List<string> QuestNames = new List<string>();
 	public List<Quest> Quests = new List<Quest>();
 	private string ConfigFile;
+	public List<Dictionary<string, object>> dialogues;
 
-    // Start is called before the first frame update
+	void Awake() {
+		if (FindObjectsOfType<NetworkManager>().Length > 1) {
+			Destroy(gameObject);
+		}
+		DontDestroyOnLoad(this);
+	}
+
     void Start() {
 		GameObject.DontDestroyOnLoad(this.gameObject);
 		//Try to get json from server
@@ -68,11 +75,11 @@ public class NetworkManager : MonoBehaviour
 		}
 	}
 
-	List<string> GetDialog(string dialogType, string questName, string language) {
+	public List<string> GetDialog(string dialogType, string questName, string language) {
 		List<string> dialog = new List<string>();
+		dialogues = CSVReader.Read(DialoguesCSV.text);
 
-		List<Dictionary<string, object>> data = CSVReader.Read(DialoguesCSV.text);
-		foreach (var item in data)
+		foreach (var item in dialogues)
 		{
 			if ((string)item["quest_id"] == questName) {
 				if((string)item["dialog_type"] == dialogType) {
@@ -95,16 +102,17 @@ public class NetworkManager : MonoBehaviour
 				if(Quests[currentIndex].allowedQuests.Contains(((string)item["achivement_id"]))) {
 					Question newQuestion = ScriptableObject.CreateInstance<Question>();
 					if(language == "es") {
-						newQuestion.text = (string)item["question_text_es"];
-						newQuestion.answerFormula = (string)item["answer_formula_es"];
+						newQuestion.text = item["question_text_es"].ToString();
+						newQuestion.answerFormula = item["answer_formula_es"].ToString();
 					} else if(language == "en") {
-						newQuestion.text = (string)item["question_text_en"];
-						newQuestion.answerFormula = (string)item["answer_formula_en"];
+						newQuestion.text = item["question_text_en"].ToString();
+						newQuestion.answerFormula = item["answer_formula_en"].ToString();
 					}
 
 					newQuestion.maxTime = Quests[currentIndex].maxTime;
 					
 					Quests[currentIndex].questions.Add(newQuestion);
+					Quests[Quests.Count - 1].questions.Add(newQuestion);
 				}
 			}
 		}

@@ -11,6 +11,9 @@ public class Ui_Manager : MonoBehaviour {
 	public Quest quest = null;
 	bool isStart = false;
 
+	float cooldown = 0;
+	bool incourutine = false;
+
 	void Start() {
 		dialogText = new Queue<string>();
 	}
@@ -45,6 +48,10 @@ public class Ui_Manager : MonoBehaviour {
 	}
 
 	public void DisplayNextLine() {
+		if(Time.time < cooldown) {
+			return;
+		}
+		cooldown = Time.time + 0.5f;
 		if (dialogText.Count == 0) {
 			EndDialogue();
 			return;
@@ -68,14 +75,18 @@ public class Ui_Manager : MonoBehaviour {
 	}
 
 	private IEnumerator StartQuestCouritine() {
-		yield return new WaitForSeconds(1);
+		if(!incourutine) {
+			incourutine = true;
+			yield return new WaitForSeconds(1);
 
-		Manager.manager.isPaused = true;
+			Manager.manager.isPaused = true;
 
-		Manager.manager.currentQuest = quest;
-		Manager.manager.StartQuest();
-		this.quest = null;
+			Manager.manager.currentQuest = quest;
+			Manager.manager.StartQuest();
+			this.quest = null;
 
+			incourutine = false;
+		}
 	} 
 
 }
